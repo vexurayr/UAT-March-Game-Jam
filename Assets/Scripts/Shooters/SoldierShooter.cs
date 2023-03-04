@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoldierShooter : Shooter
 {
+    public Camera POV;
     // Transform where projectile will spawn
     public Transform m_FirepointTransform;
 
@@ -24,8 +25,8 @@ public class SoldierShooter : Shooter
     {
         // Turns screen pixels into world coordinates
         m_SelfToMouseVector = Input.mousePosition;
-        m_SelfToMouseVector.z = m_FirepointPivot.transform.position.z - Camera.main.transform.position.z;
-        m_SelfToMouseVector = Camera.main.ScreenToWorldPoint(m_SelfToMouseVector);
+        m_SelfToMouseVector.z = m_FirepointPivot.transform.position.z - POV.transform.position.z;
+        m_SelfToMouseVector = POV.ScreenToWorldPoint(m_SelfToMouseVector);
 
         // Makes sure spawn location stays in line with mouse
         m_SelfToMouseVector = m_SelfToMouseVector - m_FirepointPivot.transform.position;
