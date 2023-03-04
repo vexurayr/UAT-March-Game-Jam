@@ -216,7 +216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalBorder: {fileID: 3053735995595498867}
-  horizontalBorder: {fileID: 8992687919734856001}
 --- !u!1 &8992687919734856001
 GameObject:
   m_ObjectHideFlags: 0
