@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     public List<PlayerController> m_Players;
     private GameObject m_NewPawnObject;
 
+    // For infinite background
+    public List<GameObject> backgrounds;
+    public float backgroundSize;
+
     // Runs as soon as this object is enabled, one frame before Start()
     private void Awake()
     {
@@ -36,6 +40,11 @@ public class GameManager : MonoBehaviour
         SpawnPlayer();
     }
 
+    private void Update()
+    {
+        CheckPlayerDistances();
+    }
+
     private void SpawnPlayer()
     {
         // Spawns player controller into the scene
@@ -46,5 +55,35 @@ public class GameManager : MonoBehaviour
         Pawn newPawn = m_NewPawnObject.GetComponent<Pawn>();
 
         newController.m_Pawn = newPawn;
+    }
+
+    public void CheckPlayerDistances()
+    {
+        Vector2 distanceToFirstBorder = backgrounds[0].GetComponent<Background>().verticalBorder.transform.position -
+            m_Players[0].m_Pawn.transform.position;
+        Vector2 distanceToSecondBorder = backgrounds[1].GetComponent<Background>().verticalBorder.transform.position -
+            m_Players[0].m_Pawn.transform.position;
+
+        Debug.Log("Distance to First Border: " + distanceToFirstBorder.x +
+            "\nDistance to Second Border: " + distanceToSecondBorder.x);
+
+        if (distanceToSecondBorder.x >= backgroundSize && distanceToFirstBorder.x > 0)
+        {
+            backgrounds[1].transform.position = new Vector2(backgrounds[1].transform.position.x - (backgroundSize * 2),
+                backgrounds[1].transform.position.y);
+
+            GameObject temp = backgrounds[0];
+            backgrounds[0] = backgrounds[1];
+            backgrounds[1] = temp;
+        }
+        else if (distanceToSecondBorder.x < 0 && distanceToFirstBorder.x <= -backgroundSize)
+        {
+            backgrounds[0].transform.position = new Vector2(backgrounds[0].transform.position.x + (backgroundSize * 2),
+                backgrounds[0].transform.position.y);
+
+            GameObject temp = backgrounds[0];
+            backgrounds[0] = backgrounds[1];
+            backgrounds[1] = temp;
+        }
     }
 }
