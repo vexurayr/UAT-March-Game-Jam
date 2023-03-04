@@ -33,11 +33,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        SpawnPlayer();
     }
 
     void Start()
     {
-        SpawnPlayer();
+        
     }
 
     private void Update()
@@ -63,9 +65,6 @@ public class GameManager : MonoBehaviour
             m_Players[0].m_Pawn.transform.position;
         Vector2 distanceToSecondBorder = backgrounds[1].GetComponent<Background>().verticalBorder.transform.position -
             m_Players[0].m_Pawn.transform.position;
-
-        Debug.Log("Distance to First Border: " + distanceToFirstBorder.x +
-            "\nDistance to Second Border: " + distanceToSecondBorder.x);
 
         if (distanceToSecondBorder.x >= backgroundSize && distanceToFirstBorder.x > 0)
         {

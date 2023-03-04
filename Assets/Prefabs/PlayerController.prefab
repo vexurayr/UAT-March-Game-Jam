@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Pawn: {fileID: 1929869913927264774, guid: 6cbd0ba0cf86fc64bafeb81e2756fcbc, type: 3}
+  maxVerticalMovement: 9
   m_KeyForward: 119
   m_KeyBackward: 115
   m_KeyLeft: 97
