@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class SoldierShooter : Shooter
 {
-<<<<<<< Updated upstream
     public Camera POV;
-=======
-    public GameObject flashlight;
-
->>>>>>> Stashed changes
     // Transform where projectile will spawn
     public Transform m_FirepointTransform;
 
@@ -47,16 +42,10 @@ public class SoldierShooter : Shooter
         // Rotates bullet spawn relative to the object it's attached to
         m_FirepointTransform.transform.localEulerAngles = new Vector3(0, 0, m_SelfToMouseAngle);
 
-        // Rotate flashlight to match
-        flashlight.transform.localEulerAngles = new Vector3(0, 0, m_SelfToMouseAngle - 90);
-
         // Bullet spawn will always be CircleSize distance away from the bullet spawn pivot
         float xPos = Mathf.Cos(Mathf.Deg2Rad * m_SelfToMouseAngle) * m_CircleSize;
         float yPos = Mathf.Sin(Mathf.Deg2Rad * m_SelfToMouseAngle) * m_CircleSize;
         m_FirepointTransform.localPosition = new Vector3(xPos, yPos, 0);
-
-        // Move the flashlight around the player as well
-        flashlight.transform.localPosition = new Vector3(xPos, yPos, 0);
     }
 
     // Creates a new shell object, saves the damage it'll do and which object fired it, applies a force to the rigidbody to make it fly
@@ -79,6 +68,12 @@ public class SoldierShooter : Shooter
         if (rb != null)
         {
             rb.AddForce(m_FirepointTransform.right * fireForce);
+        }
+
+        // Gives BounceOffWalls component bullet trajectory and force applied on being instantiated
+        if (newShell.GetComponent<BounceOffWalls>() != null)
+        {
+            newShell.GetComponent<BounceOffWalls>().GetBulletData();
         }
 
         // If the object exists after 2nd variable in seconds, destroy object

@@ -6,9 +6,6 @@ public class Health : MonoBehaviour
 {
     public float m_MaxHealth;
     private float m_CurrentHealth;
-    public bool isEnemy;
-    public float pointsOnDeath;
-    public bool isDebugging;
 
     // Start is called before the first frame update
     void Start()
@@ -28,10 +25,7 @@ public class Health : MonoBehaviour
         // Makes sure current health never goes below 0 or higher than max health
         m_CurrentHealth = Mathf.Clamp(m_CurrentHealth, 0, m_MaxHealth);
 
-        if (isDebugging)
-        {
-            Debug.Log(source.name + " did " + amount + " damage to " + gameObject.name);
-        }
+        Debug.Log(source.name + " did " + amount + " damage to " + gameObject.name);
 
         if (m_CurrentHealth <= 0)
         {
@@ -41,8 +35,6 @@ public class Health : MonoBehaviour
 
     public void Die(Pawn source)
     {
-        PointsManager.instance.SetPlayerScore(PointsManager.instance.GetPlayerScore() + pointsOnDeath);
-
         Destroy(gameObject);
     }
 }

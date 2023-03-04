@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,9 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5243674242140854889}
+  - component: {fileID: 1378427571965660116}
   - component: {fileID: 1618330522211325757}
   - component: {fileID: 5545872573501844205}
-  - component: {fileID: 4528353493085849495}
   m_Layer: 3
   m_Name: Projectile
   m_TagString: Untagged
@@ -119,6 +119,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1378427571965660116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181743433215438724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cceb8047a4ad6478d1164a85183ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Pawn: {fileID: 1929869913927264774, guid: 6cbd0ba0cf86fc64bafeb81e2756fcbc, type: 3}
+  m_MaxNumberOfBounces: 5
 --- !u!58 &1618330522211325757
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -156,17 +170,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4528353493085849495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3181743433215438724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c79ff6bc643bffe4ea280f2474878648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DamageDone: 1
-  m_Owner: {fileID: 0}
