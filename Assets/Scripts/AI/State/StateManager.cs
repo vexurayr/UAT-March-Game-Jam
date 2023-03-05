@@ -7,7 +7,7 @@ public class StateManager : MonoBehaviour
     public State currentState;
 
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
         RunStateMachine();
     }
