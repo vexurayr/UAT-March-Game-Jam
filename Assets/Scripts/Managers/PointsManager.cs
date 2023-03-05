@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PointsManager : MonoBehaviour
 {
     public static PointsManager instance;
 
-    private int sceneStartScore;
-    public int playerScore;
+    public GameObject scoreUI;
+    public int startingScore;
+
+    private Text scoreText;
+    private int currentScore;
 
     private void Awake()
     {
@@ -26,22 +31,29 @@ public class PointsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerScore = 0;
+        scoreText = scoreUI.gameObject.GetComponent<Text>();
+        currentScore = startingScore;
+
+        scoreText.text = currentScore.ToString();
     }
 
     //Reset is called every time a new round starts
-    void Reset()
+    public void Reset()
     {
-        playerScore = sceneStartScore;
+        currentScore = 0;
+
+        scoreText.text = currentScore.ToString();
     }
 
     public int GetPlayerScore()
     {
-        return playerScore;
+        return currentScore;
     }
 
     public void SetPlayerScore(int newScore)
     {
-        playerScore = newScore;
+        currentScore = newScore;
+
+        scoreText.text = currentScore.ToString();
     }
 }
