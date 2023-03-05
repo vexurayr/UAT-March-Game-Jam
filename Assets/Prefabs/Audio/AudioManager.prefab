@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4018d96059101974295700ff7ffe6f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   audioFiles:
   - {fileID: 676601653877552699, guid: a67767fa180990e419cfbbb0307cfae5, type: 3}
   - {fileID: 676601653877552699, guid: a67767fa180990e419cfbbb0307cfae5, type: 3}
+=======
+  playerShoot: {fileID: 8300000, guid: dd208300ab973314c81f67688c6fde88, type: 3}
+>>>>>>> Stashed changes

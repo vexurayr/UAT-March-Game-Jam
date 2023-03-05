@@ -46,15 +46,16 @@ public class AI_Health : MonoBehaviour
     /// <param name="damage">Amount to damage</param>
     public void TakeDamage(int damage)
     {
-        if (CurrentHealth <= 0)
+        if (CurrentHealth > 0)
         {
+            AudioManager.instance.PlaySound("AIHit");
+            CurrentHealth -= damage;
             return;
         }
 
-        CurrentHealth -= damage;
-
         if (CurrentHealth <= 0)
         {
+            AudioManager.instance.PlaySound("AIDie");
             Die();
         }
     }
