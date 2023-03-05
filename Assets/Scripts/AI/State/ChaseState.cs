@@ -7,6 +7,7 @@ public class ChaseState : State
     public FastChaseState fastChaseState;
     public bool isInSpeedupRange;
     [SerializeField] private Transform targetTransform;
+    [SerializeField] private Character AI;
     [SerializeField] private float MoveSpeed = 4f;
     [SerializeField] private float MaxDistance = 10f;
     [SerializeField] private float MinDistance = 5f;
@@ -19,7 +20,7 @@ public class ChaseState : State
         }
         else
         {
-            transform.LookAt(targetTransform);
+            AI.transform.LookAt(targetTransform);
 
             if (Vector2.Distance(transform.position, targetTransform.position) >= MinDistance)
             {

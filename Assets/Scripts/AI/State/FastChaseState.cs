@@ -7,6 +7,7 @@ public class FastChaseState : State
     public AttackState attackState;
     public bool isInAttackRange;
     [SerializeField] private Transform targetTransform;
+    [SerializeField] private Character AI;
     [SerializeField] private float MoveSpeed = 8f;
     [SerializeField] private float MaxDistance = 10f;
     [SerializeField] private float MinDistance = 5f;
@@ -19,7 +20,7 @@ public class FastChaseState : State
         }
         else
         {
-            transform.LookAt(targetTransform);
+            AI.transform.LookAt(targetTransform);
 
             if (Vector2.Distance(transform.position, targetTransform.position) >= MinDistance)
             {

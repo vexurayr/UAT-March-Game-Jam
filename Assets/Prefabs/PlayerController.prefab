@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8619860140346388388}
   - component: {fileID: 7332962014164401390}
+  - component: {fileID: 7602000605416328112}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -51,3 +52,18 @@ MonoBehaviour:
   m_KeyLeft: 97
   m_KeyRight: 100
   m_ShootKey: 323
+  menuKey: 27
+  dieKey: 109
+--- !u!114 &7602000605416328112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944428411399060125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c8debf3f3d92f4c95b66a8f8935496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterType: 0
