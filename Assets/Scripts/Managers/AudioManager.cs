@@ -8,9 +8,7 @@ public class AudioManager : MonoBehaviour
     // Reference to itself to reach objects anywhere in the heiarchy
     public static AudioManager instance;
 
-    public AudioClip playerShoot;
-
-    private AudioSource audioPlayer;
+    public List<AudioFile> audioFiles;
 
     // Runs as soon as this object is enabled, one frame before Start()
     private void Awake()
@@ -25,13 +23,29 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        audioPlayer = GetComponent<AudioSource>();
     }
 
-    public void PlayPlayerShootSFX()
+    public void PlaySound(string fileName)
     {
-        Debug.Log("Clip: " + playerShoot);
-        audioPlayer.PlayOneShot(playerShoot);
+        foreach (AudioFile file in audioFiles)
+        {
+            if (fileName == file.fileName)
+            {
+                file.PlaySound();
+                return;
+            }
+        }
+    }
+
+    public void PlaySoundLooping(string fileName)
+    {
+        foreach (AudioFile file in audioFiles)
+        {
+            if (fileName == file.fileName)
+            {
+                file.PlaySoundLooping();
+                return;
+            }
+        }
     }
 }

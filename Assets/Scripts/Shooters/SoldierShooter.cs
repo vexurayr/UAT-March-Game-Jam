@@ -88,7 +88,7 @@ public class SoldierShooter : Shooter
             rb.AddForce(m_FirepointTransform.right * fireForce);
         }
 
-        AudioManager.instance.PlayPlayerShootSFX();
+        AudioManager.instance.PlaySound("PlayerShoot");
 
         lightSource.intensity -= decIntensityAmount;
         lightSource.intensity = Mathf.Clamp(lightSource.intensity, minIntensity, 1f);
