@@ -13,7 +13,7 @@ public class AI_Health : MonoBehaviour
 
     private Character character;
     private CharacterController controller;
-    private Collider2D collider2D;
+    private Collider collider;
     private SpriteRenderer spriteRenderer;
 
     /// <summary>
@@ -25,7 +25,7 @@ public class AI_Health : MonoBehaviour
     {
         character = GetComponent<Character>();
         controller = GetComponent<CharacterController>();
-        collider2D = GetComponent<Collider2D>();
+        collider = GetComponent<Collider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         CurrentHealth = initialHealth;
@@ -66,7 +66,7 @@ public class AI_Health : MonoBehaviour
     {
         if (character != null)
         {
-            collider2D.enabled = false;
+            collider.enabled = false;
             spriteRenderer.enabled = false;
             character.enabled = false;
             controller.enabled = false;
