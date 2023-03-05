@@ -8,15 +8,9 @@ public class FastChaseState : State
     public bool isInAttackRange;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private Character AI;
-    [SerializeField] private float MoveSpeed = 2f;
-    [SerializeField] private float MaxDistance = 12f;
-    [SerializeField] private float MinDistance = 4f;
-
-    private void Start()
-    {
-        targetTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        AI = GetComponentInParent<Character>();
-    }
+    [SerializeField] private float MoveSpeed = 8f;
+    [SerializeField] private float MaxDistance = 10f;
+    [SerializeField] private float MinDistance = 5f;
 
     public override State RunCurrentState()
     {
@@ -26,15 +20,18 @@ public class FastChaseState : State
         }
         else
         {
-            if (Vector2.Distance(AI.transform.position, targetTransform.position) >= MinDistance)
+            AI.transform.LookAt(targetTransform);
+
+            if (Vector2.Distance(transform.position, targetTransform.position) >= MinDistance)
             {
-                Vector3 direction = (targetTransform.position - transform.position);
-                AI.transform.position += direction * MoveSpeed * Time.deltaTime;
+
+                transform.position += transform.forward * MoveSpeed * Time.deltaTime;
 
                 if (Vector2.Distance(transform.position, targetTransform.position) <= MaxDistance)
                 {
                     isInAttackRange = true;
                 }
+
             }
             return this;
         }
