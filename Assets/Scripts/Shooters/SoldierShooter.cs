@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class SoldierShooter : Shooter
 {
     public GameObject flashlight;
+    public GameObject bow;
     public float decIntensityAmount;
     public float minIntensity;
     public float decAngleAmount;
@@ -56,6 +57,7 @@ public class SoldierShooter : Shooter
 
         // Rotate flashlight to match
         flashlight.transform.localEulerAngles = new Vector3(0, 0, m_SelfToMouseAngle - 90);
+        bow.transform.localEulerAngles = new Vector3(0, 0, m_SelfToMouseAngle - 135);
 
         // Bullet spawn will always be CircleSize distance away from the bullet spawn pivot
         float xPos = Mathf.Cos(Mathf.Deg2Rad * m_SelfToMouseAngle) * m_CircleSize;
@@ -64,6 +66,7 @@ public class SoldierShooter : Shooter
 
         // Move the flashlight around the player as well
         flashlight.transform.localPosition = new Vector3(xPos, yPos, 0);
+        bow.transform.localPosition = new Vector3(xPos, yPos, 0);
     }
 
     // Creates a new shell object, saves the damage it'll do and which object fired it, applies a force to the rigidbody to make it fly
