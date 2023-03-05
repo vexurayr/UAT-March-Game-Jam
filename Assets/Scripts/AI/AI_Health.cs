@@ -5,6 +5,7 @@ using UnityEngine;
 public class AI_Health : MonoBehaviour
 {
     [Header("Health")]
+    [SerializeField] private float initialHealth = 10f;
     [SerializeField] private float maxHealth = 10f;
 
     [Header("Settings")]
@@ -12,7 +13,7 @@ public class AI_Health : MonoBehaviour
 
     private Character character;
     private CharacterController controller;
-    private new Collider collider;
+    private Collider collider;
     private SpriteRenderer spriteRenderer;
 
     /// <summary>
@@ -27,7 +28,7 @@ public class AI_Health : MonoBehaviour
         collider = GetComponent<Collider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        CurrentHealth = maxHealth;
+        CurrentHealth = initialHealth;
     }
 
     private void Update()
@@ -81,6 +82,6 @@ public class AI_Health : MonoBehaviour
     /// </summary>
     private void DestroyObject()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

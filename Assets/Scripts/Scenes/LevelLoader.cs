@@ -5,20 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
+    public GameObject winScreen;
+
     public void LoadLevel()
     {
         SceneManager.LoadScene("Main");
     }
-    
-    // Start is called before the first frame update
-    void Start()
+
+    public void LoadGameLevel()
     {
-        
+        SceneManager.LoadScene("Main");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadMainMenu()
     {
-        
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void WinScreen()
+    {
+        winScreen.SetActive(true);
+
+        StartCoroutine(WaitFor(3));
+    }
+
+    public IEnumerator WaitFor(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        LoadMainMenu();
     }
 }

@@ -6,6 +6,11 @@ using UnityEngine.Rendering.Universal;
 public class SoldierShooter : Shooter
 {
     public GameObject flashlight;
+    public GameObject bow;
+    public float decIntensityAmount;
+    public float minIntensity;
+    public float decAngleAmount;
+    public float minAngle;
 
     // Transform where projectile will spawn
     public Transform m_FirepointTransform;
@@ -52,6 +57,7 @@ public class SoldierShooter : Shooter
 
         // Rotate flashlight to match
         flashlight.transform.localEulerAngles = new Vector3(0, 0, m_SelfToMouseAngle - 90);
+        bow.transform.localEulerAngles = new Vector3(0, 0, m_SelfToMouseAngle - 135);
 
         // Bullet spawn will always be CircleSize distance away from the bullet spawn pivot
         float xPos = Mathf.Cos(Mathf.Deg2Rad * m_SelfToMouseAngle) * m_CircleSize;
@@ -60,6 +66,7 @@ public class SoldierShooter : Shooter
 
         // Move the flashlight around the player as well
         flashlight.transform.localPosition = new Vector3(xPos, yPos, 0);
+        bow.transform.localPosition = new Vector3(xPos, yPos, 0);
     }
 
     // Creates a new shell object, saves the damage it'll do and which object fired it, applies a force to the rigidbody to make it fly
@@ -84,14 +91,16 @@ public class SoldierShooter : Shooter
             rb.AddForce(m_FirepointTransform.right * fireForce);
         }
 
-        lightSource.intensity -= 0.002f;
-        lightSource.intensity = Mathf.Clamp(lightSource.intensity, 0f, 1f);
+        AudioManager.instance.PlaySound("PlayerShoot");
 
-        lightSource.pointLightInnerAngle -= 0.3f;
-        lightSource.pointLightInnerAngle = Mathf.Clamp(lightSource.pointLightInnerAngle, 15f, 90f);
+        lightSource.intensity -= decIntensityAmount;
+        lightSource.intensity = Mathf.Clamp(lightSource.intensity, minIntensity, 1f);
 
-        lightSource.pointLightOuterAngle -= 0.3f;
-        lightSource.pointLightOuterAngle = Mathf.Clamp(lightSource.pointLightOuterAngle, 25f, 90f);
+        lightSource.pointLightInnerAngle -= decAngleAmount;
+        lightSource.pointLightInnerAngle = Mathf.Clamp(lightSource.pointLightInnerAngle, minAngle, 90f);
+
+        lightSource.pointLightOuterAngle -= decAngleAmount;
+        lightSource.pointLightOuterAngle = Mathf.Clamp(lightSource.pointLightOuterAngle, minAngle + 10, 90f);
 
         // If the object exists after 2nd variable in seconds, destroy object
         Destroy(newShell, lifeSpan);
