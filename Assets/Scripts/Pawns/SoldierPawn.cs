@@ -20,7 +20,6 @@ public class SoldierPawn : Pawn
             m_TimeUntilNextEvent -= Time.deltaTime;
             m_TimeUntilNextEvent = Mathf.Clamp(m_TimeUntilNextEvent, 0, m_SecondsPerShot);
         }
-        reloadText.text = "Reloading: " + m_TimeUntilNextEvent.ToString("n2");
     }
 
     // Inherits mover object from Pawn class and gets the component from Pawn's Start()

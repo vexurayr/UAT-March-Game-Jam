@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     public List<PlayerController> m_Players;
     private GameObject m_NewPawnObject;
 
+    // For infinite background
+    public List<GameObject> backgrounds;
+    public float backgroundSize;
+
     // Runs as soon as this object is enabled, one frame before Start()
     private void Awake()
     {
@@ -29,11 +33,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        SpawnPlayer();
     }
 
-    void Start()
+    private void Update()
     {
-        SpawnPlayer();
+        CheckPlayerDistances();
     }
 
     private void SpawnPlayer()
@@ -46,5 +52,32 @@ public class GameManager : MonoBehaviour
         Pawn newPawn = m_NewPawnObject.GetComponent<Pawn>();
 
         newController.m_Pawn = newPawn;
+    }
+
+    public void CheckPlayerDistances()
+    {
+        Vector2 distanceToFirstBorder = backgrounds[0].GetComponent<Background>().verticalBorder.transform.position -
+            m_Players[0].m_Pawn.transform.position;
+        Vector2 distanceToSecondBorder = backgrounds[1].GetComponent<Background>().verticalBorder.transform.position -
+            m_Players[0].m_Pawn.transform.position;
+
+        if (distanceToSecondBorder.x >= backgroundSize && distanceToFirstBorder.x > 0)
+        {
+            backgrounds[1].transform.position = new Vector2(backgrounds[1].transform.position.x - (backgroundSize * 2),
+                backgrounds[1].transform.position.y);
+
+            GameObject temp = backgrounds[0];
+            backgrounds[0] = backgrounds[1];
+            backgrounds[1] = temp;
+        }
+        else if (distanceToSecondBorder.x < 0 && distanceToFirstBorder.x <= -backgroundSize)
+        {
+            backgrounds[0].transform.position = new Vector2(backgrounds[0].transform.position.x + (backgroundSize * 2),
+                backgrounds[0].transform.position.y);
+
+            GameObject temp = backgrounds[0];
+            backgrounds[0] = backgrounds[1];
+            backgrounds[1] = temp;
+        }
     }
 }

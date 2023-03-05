@@ -22,8 +22,6 @@ public abstract class Pawn : MonoBehaviour
     protected float m_SecondsPerShot;
     protected float m_TimeUntilNextEvent;
 
-    [SerializeField] public Text reloadText;
-
     // Virtual means child classes can override this method
     // Protected keyword is necessary because no access keyword defaults to private
     // And we don't want outside scripts calling these functions

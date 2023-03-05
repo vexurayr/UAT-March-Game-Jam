@@ -6,6 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerController : Controller
 {
+    public float maxVerticalMovement;
+
     // Creates a new field representing a button that can be set in the editor
     public KeyCode m_KeyForward = KeyCode.W;
     public KeyCode m_KeyBackward = KeyCode.S;
@@ -22,6 +24,7 @@ public class PlayerController : Controller
         if (GameManager.instance != null && GameManager.instance.m_Players != null)
         {
             GameManager.instance.m_Players.Add(this);
+            PlayerCameraManager.instance.AssignPlayerController(this);
         }
     }
 
@@ -48,12 +51,12 @@ public class PlayerController : Controller
     public override void ProcessInputs()
     {
         // Get Key runs as long as it's held, Get Key Down runs once on being pressed, Get Key Up runs once on being released
-        if (Input.GetKey(m_KeyForward))
+        if (Input.GetKey(m_KeyForward) && m_Pawn.transform.position.y < maxVerticalMovement)
         {
             // Tells the pawn attached to this script to move forward
             m_Pawn.MoveForward();
         }
-        if (Input.GetKey(m_KeyBackward))
+        if (Input.GetKey(m_KeyBackward) && m_Pawn.transform.position.y > -maxVerticalMovement)
         {
             m_Pawn.MoveBackward();
         }

@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5243674242140854889}
   - component: {fileID: 1618330522211325757}
   - component: {fileID: 5545872573501844205}
-  - component: {fileID: 4528353493085849495}
+  - component: {fileID: 1422603435032901315}
   m_Layer: 3
   m_Name: Projectile
   m_TagString: Untagged
@@ -156,7 +156,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4528353493085849495
+--- !u!114 &1422603435032901315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
