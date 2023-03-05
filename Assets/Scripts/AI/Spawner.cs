@@ -53,9 +53,19 @@ public class Spawner : MonoBehaviour
             SpawnedX = spawnLocation.x;
             SpawnedY = spawnLocation.y;
 
-            if (SpawnedX != 0f && SpawnedY != 0f)
+            if (SpawnedX >= playerLocation.x + 20)
             {
+                spawnDistance = new Vector2(player.transform.position.x + 10, player.transform.position.y);
                 Instantiate(prefab, new Vector2(SpawnedX + spawnDistance.x, SpawnedY + spawnDistance.y), Quaternion.identity);
+            }
+            else if (SpawnedX <= playerLocation.x - 20)
+            {
+                spawnDistance = new Vector2(player.transform.position.x - 10, player.transform.position.y);
+                Instantiate(prefab, new Vector2(SpawnedX + spawnDistance.x, SpawnedY + spawnDistance.y), Quaternion.identity);
+            }
+            else
+            {
+                return;
             }
 
             /*
@@ -86,7 +96,7 @@ public class Spawner : MonoBehaviour
     {
         if (EnemiesInWorld <= 0)
         {
-            EnemiesNeededInWorld = Random.Range(1, 20);
+            EnemiesNeededInWorld = Random.Range(20, 40);
         }
     }
 }
