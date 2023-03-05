@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointsManager : MonoBehavior
+public class PointsManager : MonoBehaviour
 {
     public static PointsManager instance;
 
@@ -35,12 +35,12 @@ public class PointsManager : MonoBehavior
         playerScore = sceneStartScore;
     }
 
-    public float GetPlayerScore()
+    public int GetPlayerScore()
     {
         return playerScore;
     }
 
-    public void SetPlayerScore(float newScore)
+    public void SetPlayerScore(int newScore)
     {
         playerScore = newScore;
     }
