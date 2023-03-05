@@ -5,7 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
+    public static LevelLoader instance;
+
     public GameObject winScreen;
+
+    private void Awake()
+    {
+        // Only allows for one game manager, one singleton
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void LoadLevel()
     {
@@ -20,6 +36,11 @@ public class LevelLoader : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Lose()
+    {
+        StartCoroutine(WaitFor(2));
     }
 
     public void WinScreen()

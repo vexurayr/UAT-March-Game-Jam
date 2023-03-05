@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChaseState : State
 {
     public FastChaseState fastChaseState;
+    public IdleState idleState;
     public bool isInSpeedupRange;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private Character AI;
@@ -20,6 +21,10 @@ public class ChaseState : State
 
     public override State RunCurrentState()
     {
+        if (targetTransform == null)
+        {
+            return idleState;
+        }
         if (isInSpeedupRange)
         {
             return fastChaseState;

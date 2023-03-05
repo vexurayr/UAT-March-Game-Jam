@@ -46,4 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioFiles:
   - {fileID: 676601653877552699, guid: a67767fa180990e419cfbbb0307cfae5, type: 3}
-  - {fileID: 676601653877552699, guid: a67767fa180990e419cfbbb0307cfae5, type: 3}
+  - {fileID: 676601653877552699, guid: 62016435e1974c742b5cdfe189cffcbc, type: 3}
+  - {fileID: 676601653877552699, guid: a054ebeb40e7b17449eab0a541baaf60, type: 3}

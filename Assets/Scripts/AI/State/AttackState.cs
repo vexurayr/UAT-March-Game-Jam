@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackState : State
 {
     [SerializeField] private Transform targetTransform;
+    public IdleState idleState;
     [SerializeField] private Character AI;
     [SerializeField] private float MoveSpeed = 30f;
     [SerializeField] private float MaxDistance = 4f;
@@ -18,6 +19,10 @@ public class AttackState : State
 
     public override State RunCurrentState()
     {
+        if (targetTransform == null)
+        {
+            return idleState;
+        }
         if (Vector2.Distance(AI.transform.position, targetTransform.position) >= MinDistance)
         {
             Vector3 direction = (targetTransform.position - transform.position);

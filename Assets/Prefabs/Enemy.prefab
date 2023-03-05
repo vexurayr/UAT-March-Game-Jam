@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
+  idleState: {fileID: 7816131356617880875}
   AI: {fileID: 7816131358086101515}
-  MoveSpeed: 5
+  MoveSpeed: 1
   MaxDistance: 2
   MinDistance: 0.01
 --- !u!1 &7816131356617880874
@@ -224,10 +225,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackState: {fileID: 7816131356323012729}
+  idleState: {fileID: 7816131356617880875}
   isInAttackRange: 0
   targetTransform: {fileID: 0}
   AI: {fileID: 7816131358086101515}
-  MoveSpeed: 0.7
+  MoveSpeed: 0.2
   MaxDistance: 10
   MinDistance: 2
 --- !u!1 &7816131357525720482
@@ -275,10 +277,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fastChaseState: {fileID: 7816131356914552549}
+  idleState: {fileID: 7816131356617880875}
   isInSpeedupRange: 0
   targetTransform: {fileID: 0}
   AI: {fileID: 7816131358086101515}
-  MoveSpeed: 0.5
+  MoveSpeed: 0.0001
   MaxDistance: 20
   MinDistance: 10
 --- !u!1 &7816131357784795570
@@ -352,7 +355,7 @@ Transform:
   - {fileID: 7816131356714489075}
   - {fileID: 7816131357784795571}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7816131358086101516
 MonoBehaviour:

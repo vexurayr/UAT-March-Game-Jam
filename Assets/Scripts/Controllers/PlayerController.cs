@@ -53,6 +53,11 @@ public class PlayerController : Controller
     // to run the functions in the TankPawn class
     public override void ProcessInputs()
     {
+        if (m_Pawn == null)
+        {
+            return;
+        }
+
         // Get Key runs as long as it's held, Get Key Down runs once on being pressed, Get Key Up runs once on being released
         if (Input.GetKey(m_KeyForward) && m_Pawn.transform.position.y < maxVerticalMovement)
         {

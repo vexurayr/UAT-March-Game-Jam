@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,16 @@ public class Health : MonoBehaviour
         return m_CurrentHealth;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.GetComponent<Character>().GetCharacterType() !=
+           this.gameObject.GetComponent<Character>().GetCharacterType())
+        {
+            TakeDamage(1);
+        }
+    }
+
     public void TakeDamage(float amount, Pawn source)
     {
         m_CurrentHealth = m_CurrentHealth - amount;
@@ -40,6 +51,19 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float amount)
+    {
+        m_CurrentHealth = m_CurrentHealth - amount;
+
+        // Makes sure current health never goes below 0 or higher than max health
+        m_CurrentHealth = Mathf.Clamp(m_CurrentHealth, 0, m_MaxHealth);
+
+        if (m_CurrentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
     public void Die(Pawn source)
     {
         if (isEnemy)
@@ -48,7 +72,23 @@ public class Health : MonoBehaviour
         }
         else
         {
+            AudioManager.instance.PlaySound("WillhelmScream");
             SceneManager.LoadScene("MainMenu");
+        }
+
+        Destroy(gameObject);
+    }
+
+    public void Die()
+    {
+        if (isEnemy)
+        {
+            PointsManager.instance.SetPlayerScore(PointsManager.instance.GetPlayerScore() + pointsOnDeath);
+        }
+        else
+        {
+            AudioManager.instance.PlaySound("WillhelmScream");
+            LevelLoader.instance.Lose();
         }
 
         Destroy(gameObject);

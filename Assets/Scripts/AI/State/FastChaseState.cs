@@ -5,6 +5,7 @@ using UnityEngine;
 public class FastChaseState : State
 {
     public AttackState attackState;
+    public IdleState idleState;
     public bool isInAttackRange;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private Character AI;
@@ -20,6 +21,10 @@ public class FastChaseState : State
 
     public override State RunCurrentState()
     {
+        if (targetTransform == null)
+        {
+            return idleState;
+        }
         if (isInAttackRange)
         {
             return attackState;

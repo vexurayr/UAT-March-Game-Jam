@@ -12,15 +12,8 @@ public class Character : MonoBehaviour
 
     [SerializeField] private CharacterTypes characterType;
 
-    // Start is called before the first frame update
-    void Start()
+    public CharacterTypes GetCharacterType()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        return characterType;
     }
 }

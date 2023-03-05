@@ -9,6 +9,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Vector2 forcedSpawnLocation;
     [SerializeField] private bool random;
 
+    public Vector2 spawnDistance;
+
     private Vector2 spawnLocation;
     private GameObject[] EnemiesInScene;
     private int EnemiesInWorld = 0;
@@ -27,7 +29,10 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         EnemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
-        spawnLocation = new Vector2(playerLocation.x * (Random.insideUnitCircle.x * Random.Range(-20f, 20f)), playerLocation.y * (Random.insideUnitCircle.y * Random.Range(-9f, 9f)));
+        spawnDistance = new Vector2(player.transform.position.x + 45, player.transform.position.y);
+        spawnLocation = new Vector2(playerLocation.x * (Random.insideUnitCircle.x * Random.Range(-20f, 20f)),
+            playerLocation.y * (Random.insideUnitCircle.y * Random.Range(-9f, 9f)));
+        Debug.Log(spawnLocation);
         SetNewMaxSpawn();
     }
 
@@ -48,17 +53,18 @@ public class Spawner : MonoBehaviour
             SpawnedX = spawnLocation.x;
             SpawnedY = spawnLocation.y;
 
-            if (SpawnedX != 0f)
+            if (SpawnedX != 0f && SpawnedY != 0f)
             {
-                if (SpawnedY != 0f)
-                {
-                    Instantiate(prefab, new Vector2(SpawnedX, SpawnedY), Quaternion.identity);
-                }
+                Instantiate(prefab, new Vector2(SpawnedX + spawnDistance.x, SpawnedY + spawnDistance.y), Quaternion.identity);
             }
-            //if ((SpawnedX < -(Screen.width) || SpawnedX > Screen.width) && (SpawnedY < -(Screen.height) || SpawnedY > Screen.height))
-            //{
-                
-            //}
+
+            /*
+            if (SpawnedX > -spawnDistanceX || SpawnedX < spawnDistanceX && SpawnedY < -spawnDistanceY || SpawnedY > spawnDistanceY)
+            {
+                Debug.Log("Spawning Enemy");
+                Instantiate(prefab, new Vector2(SpawnedX, SpawnedY), Quaternion.identity);
+            }
+            */
         }
         else
         {

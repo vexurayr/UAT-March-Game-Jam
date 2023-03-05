@@ -69,6 +69,11 @@ public class GameManager : MonoBehaviour
 
     public void CheckPlayerDistances()
     {
+        if (m_Players[0] == null)
+        {
+            return;
+        }
+
         Vector2 distanceToFirstBorder = backgrounds[0].GetComponent<Background>().verticalBorder.transform.position -
             m_Players[0].m_Pawn.transform.position;
         Vector2 distanceToSecondBorder = backgrounds[1].GetComponent<Background>().verticalBorder.transform.position -
