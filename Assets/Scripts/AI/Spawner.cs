@@ -5,11 +5,12 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
-    [SerializeField] private Character player;
+    [SerializeField] private GameObject player;
     [SerializeField] private Vector2 forcedSpawnLocation;
     [SerializeField] private bool random;
 
     private Vector2 spawnLocation;
+    private GameObject[] EnemiesInScene;
     private int EnemiesInWorld = 0;
     private int EnemiesNeededInWorld;
     private float SpawnedX;
@@ -17,10 +18,17 @@ public class Spawner : MonoBehaviour
 
     private Vector2 playerLocation;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        EnemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
+    }
+
     private void Update()
     {
+        EnemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
+        spawnLocation = new Vector2(playerLocation.x * (Random.insideUnitCircle.x * Random.Range(-20f, 20f)), playerLocation.y * (Random.insideUnitCircle.y * Random.Range(-9f, 9f)));
         SetNewMaxSpawn();
-        spawnLocation = new Vector2(playerLocation.x * (Random.insideUnitCircle.x * Random.Range(150f, 200f)), playerLocation.y * (Random.insideUnitCircle.y * Random.Range(150f, 200f)));
     }
 
     private void FixedUpdate()
@@ -40,9 +48,16 @@ public class Spawner : MonoBehaviour
             SpawnedX = spawnLocation.x;
             SpawnedY = spawnLocation.y;
 
+            if (SpawnedX != 0f)
+            {
+                if (SpawnedY != 0f)
+                {
+                    Instantiate(prefab, new Vector2(SpawnedX, SpawnedY), Quaternion.identity);
+                }
+            }
             //if ((SpawnedX < -(Screen.width) || SpawnedX > Screen.width) && (SpawnedY < -(Screen.height) || SpawnedY > Screen.height))
             //{
-                Instantiate(prefab, new Vector2(SpawnedX, SpawnedY), Quaternion.identity);
+                
             //}
         }
         else
@@ -54,12 +69,10 @@ public class Spawner : MonoBehaviour
 
     private void CheckSpawn()
     {
-        if (EnemiesInWorld < EnemiesNeededInWorld)
+
+        if (EnemiesInScene.Length <= EnemiesNeededInWorld)
         {
-            for (EnemiesInWorld = 0; EnemiesInWorld < EnemiesNeededInWorld; EnemiesInWorld++)
-            {
-                OnSpawnPrefab();
-            }
+            OnSpawnPrefab();
         }
     }
 
