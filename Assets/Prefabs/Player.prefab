@@ -269,7 +269,7 @@ MonoBehaviour:
   m_ProjectileFireForce: 850
   m_DamageDone: 1
   m_ProjectileLifeSpan: 5
-  m_ShotsPerSecond: 0.8
+  m_ShotsPerSecond: 2
 --- !u!114 &5436738508351996269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +283,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashlight: {fileID: 5825691017746531035}
+  decIntensityAmount: 0.001
+  minIntensity: 0.05
+  decAngleAmount: 0.5
+  minAngle: 20
   m_FirepointTransform: {fileID: 808966963408019154}
   m_FirepointPivot: {fileID: 3378596976801388981}
   m_CircleSize: 0.5

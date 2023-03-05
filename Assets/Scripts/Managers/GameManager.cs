@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     // To mess with global lighting
     public Light2D sunlight;
-    public float decMult;
+    public float lightDecMult;
 
     // Runs as soon as this object is enabled, one frame before Start()
     private void Awake()
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         CheckPlayerDistances();
 
-        sunlight.intensity -= (decMult * Time.deltaTime);
+        sunlight.intensity -= (lightDecMult * Time.deltaTime);
         sunlight.intensity = Mathf.Clamp(sunlight.intensity, 0f, 1f);
     }
 

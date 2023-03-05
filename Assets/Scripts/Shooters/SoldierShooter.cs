@@ -6,6 +6,10 @@ using UnityEngine.Rendering.Universal;
 public class SoldierShooter : Shooter
 {
     public GameObject flashlight;
+    public float decIntensityAmount;
+    public float minIntensity;
+    public float decAngleAmount;
+    public float minAngle;
 
     // Transform where projectile will spawn
     public Transform m_FirepointTransform;
@@ -84,14 +88,16 @@ public class SoldierShooter : Shooter
             rb.AddForce(m_FirepointTransform.right * fireForce);
         }
 
-        lightSource.intensity -= 0.002f;
-        lightSource.intensity = Mathf.Clamp(lightSource.intensity, 0f, 1f);
+        AudioManager.instance.PlayPlayerShootSFX();
 
-        lightSource.pointLightInnerAngle -= 0.3f;
-        lightSource.pointLightInnerAngle = Mathf.Clamp(lightSource.pointLightInnerAngle, 15f, 90f);
+        lightSource.intensity -= decIntensityAmount;
+        lightSource.intensity = Mathf.Clamp(lightSource.intensity, minIntensity, 1f);
 
-        lightSource.pointLightOuterAngle -= 0.3f;
-        lightSource.pointLightOuterAngle = Mathf.Clamp(lightSource.pointLightOuterAngle, 25f, 90f);
+        lightSource.pointLightInnerAngle -= decAngleAmount;
+        lightSource.pointLightInnerAngle = Mathf.Clamp(lightSource.pointLightInnerAngle, minAngle, 90f);
+
+        lightSource.pointLightOuterAngle -= decAngleAmount;
+        lightSource.pointLightOuterAngle = Mathf.Clamp(lightSource.pointLightOuterAngle, minAngle + 10, 90f);
 
         // If the object exists after 2nd variable in seconds, destroy object
         Destroy(newShell, lifeSpan);
