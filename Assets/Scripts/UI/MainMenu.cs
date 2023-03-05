@@ -10,7 +10,10 @@ public class MainMenu : MonoBehaviour
     public void PlayButton()
     {
         transitionAnimator.SetTrigger("Fade");
-        SceneManager.LoadScene("Main");
-        Debug.Log("ShouldAnimate");
+    }
+
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 }
