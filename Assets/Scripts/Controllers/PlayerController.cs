@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Allows objects of this class to appear in the editor
 [System.Serializable]
@@ -14,6 +15,7 @@ public class PlayerController : Controller
     public KeyCode m_KeyLeft = KeyCode.A;
     public KeyCode m_KeyRight = KeyCode.D;
     public KeyCode m_ShootKey = KeyCode.Mouse0; // Left-click
+    public KeyCode menuKey = KeyCode.Escape;
 
     // Start is called before the first frame update
     public override void Start()
@@ -73,6 +75,11 @@ public class PlayerController : Controller
         {
             // Calls the Shoot function in the Pawn class
             m_Pawn.Shoot();
+        }
+
+        if (Input.GetKey(menuKey))
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
