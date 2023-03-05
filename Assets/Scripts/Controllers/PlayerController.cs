@@ -16,6 +16,7 @@ public class PlayerController : Controller
     public KeyCode m_KeyRight = KeyCode.D;
     public KeyCode m_ShootKey = KeyCode.Mouse0; // Left-click
     public KeyCode menuKey = KeyCode.Escape;
+    public KeyCode dieKey = KeyCode.M;
 
     // Start is called before the first frame update
     public override void Start()
@@ -80,6 +81,11 @@ public class PlayerController : Controller
         if (Input.GetKey(menuKey))
         {
             SceneManager.LoadScene("MainMenu");
+        }
+
+        if (Input.GetKey(dieKey))
+        {
+            m_Pawn.GetComponent<Health>().TakeDamage(1, m_Pawn);
         }
     }
 }

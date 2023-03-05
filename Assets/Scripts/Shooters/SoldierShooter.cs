@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class SoldierShooter : Shooter
 {
@@ -15,6 +16,12 @@ public class SoldierShooter : Shooter
 
     private Vector3 m_SelfToMouseVector;
     private float m_SelfToMouseAngle;
+    private Light2D lightSource;
+
+    public void Start()
+    {
+        lightSource = flashlight.GetComponent<Light2D>();
+    }
 
     public void Update()
     {
@@ -76,6 +83,15 @@ public class SoldierShooter : Shooter
         {
             rb.AddForce(m_FirepointTransform.right * fireForce);
         }
+
+        lightSource.intensity -= 0.002f;
+        lightSource.intensity = Mathf.Clamp(lightSource.intensity, 0f, 1f);
+
+        lightSource.pointLightInnerAngle -= 0.3f;
+        lightSource.pointLightInnerAngle = Mathf.Clamp(lightSource.pointLightInnerAngle, 15f, 90f);
+
+        lightSource.pointLightOuterAngle -= 0.3f;
+        lightSource.pointLightOuterAngle = Mathf.Clamp(lightSource.pointLightOuterAngle, 25f, 90f);
 
         // If the object exists after 2nd variable in seconds, destroy object
         Destroy(newShell, lifeSpan);

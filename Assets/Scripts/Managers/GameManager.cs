@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class GameManager : MonoBehaviour
     // For infinite background
     public List<GameObject> backgrounds;
     public float backgroundSize;
+
+    // To mess with global lighting
+    public Light2D sunlight;
+    public float decMult;
 
     // Runs as soon as this object is enabled, one frame before Start()
     private void Awake()
@@ -40,6 +45,9 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         CheckPlayerDistances();
+
+        sunlight.intensity -= (decMult * Time.deltaTime);
+        sunlight.intensity = Mathf.Clamp(sunlight.intensity, 0f, 1f);
     }
 
     private void SpawnPlayer()
