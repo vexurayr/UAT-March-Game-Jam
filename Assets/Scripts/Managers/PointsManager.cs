@@ -8,6 +8,8 @@ public class PointsManager : MonoBehaviour
 {
     public static PointsManager instance;
 
+    public LevelLoader levelLoader;
+
     public GameObject scoreUI;
     public int startingScore;
 
@@ -55,5 +57,10 @@ public class PointsManager : MonoBehaviour
         currentScore = newScore;
 
         scoreText.text = currentScore.ToString();
+
+        if (currentScore >= 1000)
+        {
+            levelLoader.WinScreen();
+        }
     }
 }

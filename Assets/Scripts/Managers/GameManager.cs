@@ -40,7 +40,10 @@ public class GameManager : MonoBehaviour
         }
 
         SpawnPlayer();
+    }
 
+    private void Start()
+    {
         AudioManager.instance.PlaySoundLooping("GameAmbience");
     }
 
