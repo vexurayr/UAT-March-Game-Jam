@@ -14,6 +14,8 @@ public class SoldierShooter : Shooter
     private Vector3 m_SelfToMouseVector;
     private float m_SelfToMouseAngle;
 
+    public AudioSource PlayerShot;
+
     public void Update()
     {
         RotateBulletSpawn();
@@ -51,6 +53,8 @@ public class SoldierShooter : Shooter
     // and destroys it after a set period of time
     public override void Shoot(GameObject shellPrefab, float fireForce, float damageDone, float lifeSpan)
     {
+        PlayerShot.Play();
+
         GameObject newShell = Instantiate(shellPrefab, m_FirepointTransform.position, m_FirepointTransform.rotation);
         DamageOnHit doh = newShell.GetComponent<DamageOnHit>();
 
