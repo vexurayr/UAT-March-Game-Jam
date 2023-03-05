@@ -6,8 +6,8 @@ public class PointsManager : MonoBehaviour
 {
     public static PointsManager instance;
 
-    private float sceneStartScore;
-    public float playerScore;
+    private int sceneStartScore;
+    public int playerScore;
 
     private void Awake()
     {
@@ -35,12 +35,12 @@ public class PointsManager : MonoBehaviour
         playerScore = sceneStartScore;
     }
 
-    public float GetPlayerScore()
+    public int GetPlayerScore()
     {
         return playerScore;
     }
 
-    public void SetPlayerScore(float newScore)
+    public void SetPlayerScore(int newScore)
     {
         playerScore = newScore;
     }

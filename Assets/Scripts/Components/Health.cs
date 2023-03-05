@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
     public float m_MaxHealth;
     private float m_CurrentHealth;
     public bool isEnemy;
-    public float pointsOnDeath;
+    public int pointsOnDeath;
     public bool isDebugging;
 
     // Start is called before the first frame update
