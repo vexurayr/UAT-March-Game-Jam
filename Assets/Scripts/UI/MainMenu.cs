@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public Animator TransitionAnimator;
+    public Animator transitionAnimator;
+
     public void PlayButton()
     {
-        //SceneManager.LoadScene("Main");
-        TransitionAnimator.SetTrigger("Fade");
-        Debug.Log("ShouldAnimate");
+        transitionAnimator.SetTrigger("Fade");
+    }
+
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 }
