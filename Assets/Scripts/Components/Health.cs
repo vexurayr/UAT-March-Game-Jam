@@ -25,11 +25,11 @@ public class Health : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.GetComponent<Character>().GetCharacterType() !=
            this.gameObject.GetComponent<Character>().GetCharacterType())
         {
             TakeDamage(1);
+            Debug.Log(collision.gameObject.name);
         }
     }
 
@@ -48,6 +48,10 @@ public class Health : MonoBehaviour
         if (m_CurrentHealth <= 0)
         {
             Die(source);
+        }
+        else
+        {
+            AudioManager.instance.PlaySound("EnemyHitFile");
         }
     }
 
@@ -69,10 +73,12 @@ public class Health : MonoBehaviour
         if (isEnemy)
         {
             PointsManager.instance.SetPlayerScore(PointsManager.instance.GetPlayerScore() + pointsOnDeath);
+
+            AudioManager.instance.PlaySound("EnemyDeathFile");
         }
         else
         {
-            AudioManager.instance.PlaySound("WillhelmScream");
+            AudioManager.instance.PlaySound("WilhelmScream");
             SceneManager.LoadScene("MainMenu");
         }
 
@@ -87,7 +93,7 @@ public class Health : MonoBehaviour
         }
         else
         {
-            AudioManager.instance.PlaySound("WillhelmScream");
+            AudioManager.instance.PlaySound("WilhelmScream");
             LevelLoader.instance.Lose();
         }
 

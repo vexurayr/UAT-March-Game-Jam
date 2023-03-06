@@ -40,12 +40,14 @@ public class LevelLoader : MonoBehaviour
 
     public void Lose()
     {
-        StartCoroutine(WaitFor(2));
+        StartCoroutine(WaitFor(2f));
     }
 
     public void WinScreen()
     {
         winScreen.SetActive(true);
+
+        AudioManager.instance.PlaySound("VictoryFile");
 
         StartCoroutine(WaitFor(3));
     }

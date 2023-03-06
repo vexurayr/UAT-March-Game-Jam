@@ -47,7 +47,7 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   idleState: {fileID: 7816131356617880875}
   AI: {fileID: 7816131358086101515}
-  MoveSpeed: 3
+  MoveSpeed: 2
   MaxDistance: 2
   MinDistance: 0.01
 --- !u!1 &7816131356617880874
@@ -229,7 +229,7 @@ MonoBehaviour:
   isInAttackRange: 0
   targetTransform: {fileID: 0}
   AI: {fileID: 7816131358086101515}
-  MoveSpeed: 0.2
+  MoveSpeed: 0.1
   MaxDistance: 8
   MinDistance: 2
 --- !u!1 &7816131357525720482
@@ -328,9 +328,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7816131358086101517}
-  - component: {fileID: 7816131358086101516}
   - component: {fileID: 7816131358086101519}
   - component: {fileID: 7816131358086101518}
+  - component: {fileID: 7816131358086101516}
   - component: {fileID: 7816131358086101513}
   - component: {fileID: 7816131358086101515}
   m_Layer: 0
@@ -357,22 +357,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7816131358086101516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7816131358086101514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1f3d0347fe090d4baa73de219dda247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MaxHealth: 3
-  isEnemy: 1
-  pointsOnDeath: 5
-  isDebugging: 0
 --- !u!61 &7816131358086101519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -420,6 +404,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &7816131358086101516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7816131358086101514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f3d0347fe090d4baa73de219dda247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHealth: 3
+  isEnemy: 1
+  pointsOnDeath: 2
+  isDebugging: 0
 --- !u!114 &7816131358086101513
 MonoBehaviour:
   m_ObjectHideFlags: 0

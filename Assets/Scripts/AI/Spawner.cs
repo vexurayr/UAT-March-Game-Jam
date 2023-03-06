@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
         spawnDistance = new Vector2(player.transform.position.x + 45, player.transform.position.y);
         spawnLocation = new Vector2(playerLocation.x * (Random.insideUnitCircle.x * Random.Range(-20f, 20f)),
             playerLocation.y * (Random.insideUnitCircle.y * Random.Range(-9f, 9f)));
-        Debug.Log(spawnLocation);
+        
         SetNewMaxSpawn();
     }
 
