@@ -9,6 +9,7 @@ public class IdleState : State
 
     public override State RunCurrentState()
     {
+        canSeeThePlayer = true;
         if (canSeeThePlayer)
         {
             return chaseState;

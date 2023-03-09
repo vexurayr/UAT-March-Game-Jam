@@ -82,7 +82,7 @@ public class Health : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void Die()
@@ -97,6 +97,6 @@ public class Health : MonoBehaviour
             LevelLoader.instance.Lose();
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

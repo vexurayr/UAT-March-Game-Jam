@@ -17,4 +17,9 @@ public class SoldierMover : Mover
         // Applies movement to rigidbody instead of transform to make sure collisions are consistant
         m_Rigidbody.transform.position = m_Rigidbody.transform.position + moveVector;
     }
+
+    public void OnDisable()
+    {
+        m_Rigidbody = null;
+    }
 }

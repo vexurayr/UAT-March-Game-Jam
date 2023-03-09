@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e2d09a5ef8eb9449e31d4a6c523a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7816131358086101514, guid: 0427824e075bfa845a317b0113f778f0, type: 3}
-  player: {fileID: 0}
-  forcedSpawnLocation: {x: 0, y: 0}
-  random: 1
+  objectPrefab: {fileID: 3262277740528198525, guid: 0427824e075bfa845a317b0113f778f0, type: 3}
+  poolSize: 10
+  poolName: Enemy Spawner
+  poolCanExpand: 0

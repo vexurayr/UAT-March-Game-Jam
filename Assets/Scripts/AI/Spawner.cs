@@ -4,99 +4,92 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab;
-    [SerializeField] private GameObject player;
-    [SerializeField] private Vector2 forcedSpawnLocation;
-    [SerializeField] private bool random;
+    [SerializeField] private GameObject objectPrefab;
+    [SerializeField] private int poolSize = 10;
+    [SerializeField] private string poolName;
+    [SerializeField] private bool poolCanExpand = true;
 
-    public Vector2 spawnDistance;
-
+    private GameObject player;
+    private List<GameObject> pooledObjects;
+    private GameObject parentObject;
+    private float spawnDistance;
     private Vector2 spawnLocation;
-    private GameObject[] EnemiesInScene;
-    private int EnemiesInWorld = 0;
-    private int EnemiesNeededInWorld;
-    private float SpawnedX;
-    private float SpawnedY;
+    private float spawnTimer;
 
-    private Vector2 playerLocation;
+    public Vector3 EnemySpawnPosition { get; set; }
 
+    // Start is called before the first frame update
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        EnemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
+        parentObject = new GameObject(name: poolName);
+        Refill();
     }
 
     private void Update()
     {
-        EnemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
-        spawnDistance = new Vector2(player.transform.position.x + 45, player.transform.position.y);
-        spawnLocation = new Vector2(playerLocation.x * (Random.insideUnitCircle.x * Random.Range(-20f, 20f)),
-            playerLocation.y * (Random.insideUnitCircle.y * Random.Range(-9f, 9f)));
-        
-        SetNewMaxSpawn();
-    }
+        spawnTimer += 0.5f;
 
-    private void FixedUpdate()
-    {
-        CheckSpawn();
-    }
-
-    public void OnSpawnPrefab()
-    {
-        if (player != null)
+        if (spawnTimer > 2)
         {
-            playerLocation = player.transform.position;
-        }
+            EvaluateEnemySpawnPosition();
+            spawnDistance = Vector2.Distance(EnemySpawnPosition, player.transform.position);
 
-        if (random)
-        {
-            SpawnedX = spawnLocation.x;
-            SpawnedY = spawnLocation.y;
-
-            if (SpawnedX >= playerLocation.x + 20)
+            if (spawnDistance >= 15)
             {
-                spawnDistance = new Vector2(player.transform.position.x + 10, player.transform.position.y);
-                Instantiate(prefab, new Vector2(SpawnedX + spawnDistance.x, SpawnedY + spawnDistance.y), Quaternion.identity);
+                SpawnEnemy(EnemySpawnPosition);
             }
-            else if (SpawnedX <= playerLocation.x - 20)
-            {
-                spawnDistance = new Vector2(player.transform.position.x - 10, player.transform.position.y);
-                Instantiate(prefab, new Vector2(SpawnedX + spawnDistance.x, SpawnedY + spawnDistance.y), Quaternion.identity);
-            }
-            else
-            {
-                return;
-            }
-
-            /*
-            if (SpawnedX > -spawnDistanceX || SpawnedX < spawnDistanceX && SpawnedY < -spawnDistanceY || SpawnedY > spawnDistanceY)
-            {
-                Debug.Log("Spawning Enemy");
-                Instantiate(prefab, new Vector2(SpawnedX, SpawnedY), Quaternion.identity);
-            }
-            */
-        }
-        else
-        {
-            //debug
-            Instantiate(prefab, forcedSpawnLocation, Quaternion.identity);
+            spawnTimer = 0;
         }
     }
 
-    private void CheckSpawn()
+    public void Refill()
     {
-
-        if (EnemiesInScene.Length <= EnemiesNeededInWorld)
+        pooledObjects = new List<GameObject>();
+        for (int i = 0; i < poolSize; i++)
         {
-            OnSpawnPrefab();
+            AddObjectToPool();
         }
     }
 
-    private void SetNewMaxSpawn()
+    public GameObject GetObjectFromPool()
     {
-        if (EnemiesInWorld <= 0)
+        for (int i = 0; i < pooledObjects.Count; i++)
         {
-            EnemiesNeededInWorld = Random.Range(20, 40);
+            if (!pooledObjects[i].activeInHierarchy)
+            {
+                return pooledObjects[i];
+            }
         }
+
+        if (poolCanExpand)
+        {
+            return AddObjectToPool();
+        }
+
+        return null;
+    }
+
+    public GameObject AddObjectToPool()
+    {
+        GameObject newObject = Instantiate(objectPrefab);
+        newObject.SetActive(false);
+        newObject.transform.parent = parentObject.transform;
+
+        pooledObjects.Add(newObject);
+        return newObject;
+    }
+
+    private void SpawnEnemy(Vector2 spawnPosition)
+    {
+        //Get Obj from pool
+        GameObject EnemyPooled = GetObjectFromPool();
+        EnemyPooled.transform.position = spawnPosition;
+        EnemyPooled.SetActive(true);
+    }
+
+    private void EvaluateEnemySpawnPosition()
+    {
+        EnemySpawnPosition = new Vector2(player.transform.position.x + (Random.insideUnitCircle.x * Random.Range(-20f, 20f)), (Random.insideUnitCircle.y * Random.Range(-9f, 9f)));
     }
 }

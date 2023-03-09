@@ -39,4 +39,14 @@ public class AttackState : State
         }
         return this;
     }
+
+    public void OnDisable()
+    {
+        targetTransform = null;
+    }
+
+    public void OnEnable()
+    {
+        targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 }

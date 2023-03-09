@@ -7,6 +7,7 @@ public class SoldierShooter : Shooter
 {
     public GameObject flashlight;
     public GameObject bow;
+    private GameObject newShell;
     public float decIntensityAmount;
     public float minIntensity;
     public float decAngleAmount;
@@ -73,7 +74,7 @@ public class SoldierShooter : Shooter
     // and destroys it after a set period of time
     public override void Shoot(GameObject shellPrefab, float fireForce, float damageDone, float lifeSpan)
     {
-        GameObject newShell = Instantiate(shellPrefab, m_FirepointTransform.position, m_FirepointTransform.rotation);
+        newShell = Instantiate(shellPrefab, m_FirepointTransform.position, m_FirepointTransform.rotation);
         DamageOnHit doh = newShell.GetComponent<DamageOnHit>();
 
         // If damage on hit component exists, set its damage and owner to the data saved in the pawn
@@ -104,5 +105,10 @@ public class SoldierShooter : Shooter
 
         // If the object exists after 2nd variable in seconds, destroy object
         Destroy(newShell, lifeSpan);
+    }
+
+    public void OnDisable()
+    {
+        newShell.SetActive(false);
     }
 }
